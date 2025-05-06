@@ -1,0 +1,10 @@
+# --- continuous ---
+.DS_Store/
+.vscode/
+
+objs/
+
+*.a
+*.out
+
+# --- add ---
