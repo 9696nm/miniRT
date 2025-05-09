@@ -6,7 +6,13 @@
 /*   By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:06:02 by hana/hmori        #+#    #+#             */
-/*   Updated: 2025/05/08 18:06:03 by hana/hmori       ###   ########.fr       */
+/*   Updated: 2025/05/10 01:57:48 by hana/hmori       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minirt.h"
+
+int	main(void)
+{
+	return (0);
+}
