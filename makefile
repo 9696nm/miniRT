@@ -6,7 +6,7 @@
 #    By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 15:14:11 by hana/hmori        #+#    #+#              #
-#    Updated: 2025/05/10 01:58:10 by hana/hmori       ###   ########.fr        #
+#    Updated: 2025/05/10 02:43:52 by hana/hmori       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ WARNING_FLAG	=	-Wall -Wextra -Werror
 OPT_FLAGS		=	-O0
 INC_PATHS		=	-I$(INCLUDES_DIR) -I$(LIBFT_DIR)$(INCLUDES_DIR) -I$(MLX_DIR)
 LINK_LIBS		=	-Imlx -lXext -lX11 -lm
+DEPEND_FLAGS	=	-MMD -MP
 
 # -library-
 LIBFT_DIR		=	libft/
@@ -48,35 +49,35 @@ RESET			=	"\033[0m"
 
 
 # --rule--
+-include $(DEPENDENCY)
+
 all: $(LIBFT_DIR) $(MLX_DIR) $(TARGET)
 
-$(TARGET): $(OBJS) $(LIBFTA)
-	$(CC) $(WARNING_FLAG) $(OPT_FLAGS) $(INC_PATHS) $(OBJS) $(LIBFTA) $(LIBMLXA) -o $@ $(LINK_LIBS)
-	@echo $(GREEN)"---$(FLAG) Compiling Sccusse !---"$(RESET)
+$(TARGET): $(LIBFTA) $(LIBMLXA) $(OBJS)
+	$(CC) $(WARNING_FLAG) $(OPT_FLAGS) $(INC_PATHS) $^ -o $@ $(LINK_LIBS)
+	@echo $(GREEN)"--- $(PROJECT_NAME) $(COMPILE_TYPE) Compiling Sccusse! ---"$(RESET)
+
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
+	$(CC) $(WARNING_FLAG) $(OPT_FLAGS) $(INC_PATHS) $(DEPEND_FLAGS) -c $< -o $@
 
 $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
-	$(CC) $(WARNING_FLAG) $(OPT_FLAGS) $(INC_PATHS) -MMD -MP -c $< -o $@
-
--include $(DEPENDENCY)
-
 $(LIBFT_DIR):
 	@git submodule update --init --remote --recursive
-	@make -C $(LIBFT_DIR) extra
+	@+make -C $(LIBFT_DIR) extra
 
 $(MLX_DIR):
-	@make -C $(MLX_DIR)
+	@-make -C $(MLX_DIR)
 
 bonus:
-	@$(MAKE) all FLAG=bonus
+	@$(MAKE) all COMPILE_TYPE=bonus
 
 clean:
 	@make -C $(LIBFT_DIR) clean
 	@if [ -d $(OBJS_DIR) ]; then \
 		rm -rf $(OBJS_DIR); \
-		echo $(RED)"$(PROJECT_NAME) $(OBJS_DIR) deleted !"$(RESET); \
+		echo $(RED)"$(PROJECT_NAME) $(OBJS_DIR) deleted!"$(RESET); \
 	else \
 		echo $(CYAN)"$(PROJECT_NAME) object is already deleted."$(RESET); \
 	fi
@@ -86,7 +87,7 @@ fclean: clean
 	@make -C $(MLX_DIR) clean
 	@if [ -f $(TARGET) ]; then \
 		rm -f $(TARGET); \
-		echo $(RED)"$(PROJECT_NAME) $(TARGET) deleted !"$(RESET); \
+		echo $(RED)"$(PROJECT_NAME) $(TARGET) deleted!"$(RESET); \
 	else \
 		echo $(CYAN)"$(PROJECT_NAME) archive is already deleted."$(RESET); \
 	fi
