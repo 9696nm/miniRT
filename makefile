@@ -6,11 +6,11 @@
 #    By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 15:14:11 by hana/hmori        #+#    #+#              #
-#    Updated: 2025/05/10 02:43:52 by hana/hmori       ###   ########.fr        #
+#    Updated: 2025/06/17 18:19:30 by hana/hmori       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-TARGET			=	miniRT
+TARGET			=	miniRT.out
 PROJECT_NAME	=	miniRT
 
 MAKEFLAGS		+=	--no-print-directory
