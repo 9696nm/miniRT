@@ -1,11 +1,12 @@
 # --- continuous ---
-.DS_Store/
-.vscode/
+.DS_Store
+.vscode
 
-objs/
+objs
 
 *.a
 *.out
+*.log
 
 # --- add ---
 miniRT
