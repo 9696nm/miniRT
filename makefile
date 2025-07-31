@@ -26,18 +26,25 @@ OPT_FLAGS		=	-O0
 INC_PATHS		=	$(addprefix -I,$(INC_DIR))
 
 LIB_PATHS		=	$(addprefix -L,$(LIB_DIR))
-LIB_FLAGS		=	-lXext -lX11 -lm -lmlx_Linux -lmrt -larith -lft
+LIB_FLAGS		=	-lXext -lX11 -lm -lmlx_Linux
+# LIB_FLAGS		=	-lXext -lX11 -lm -lmlx_Linux -lmrt -larith -lft
 
 DEPEND_FLAGS	=	-MMD -MP
 
 # -library-
 LIBFT_DIR		=	libft/
+LIBFTA			=	$(LIBFT_DIR)libft.a
+LIBARITHA		=	$(LIBFT_DIR)libarith.a
+
 LIBMINIRT_DIR	=	libminirt/
+LIBMINIRTA		=   $(LIBMINIRT_DIR)libmrt.a
+
 MLX_DIR			=	minilibx-linux/
 
 # -target-
-INC_DIR			=	include/ $(LIBFT_DIR) $(LIBMINIRT_DIR) $(MLX_DIR)
-LIB_DIR			=	$(LIBFT_DIR) $(LIBMINIRT_DIR) $(MLX_DIR)
+INC_DIR			=	includes/ $(LIBFT_DIR) $(LIBMINIRT_DIR) $(MLX_DIR)
+LIB_DIR			=	$(MLX_DIR)
+# LIB_DIR			=	$(LIBFT_DIR) $(LIBMINIRT_DIR) $(MLX_DIR)
 SRC_DIR			=	srcs/
 OBJ_DIR			=	objs/
 
@@ -67,7 +74,8 @@ RESET			=	"\033[0m"
 
 
 # --rule--	
-all: submodule $(LIBFT_DIR) $(LIBMINIRT_DIR) $(MLX_DIR) $(TARGET)
+# all: submodule $(LIBFT_DIR) $(LIBMINIRT_DIR) $(MLX_DIR) $(TARGET)
+all: $(LIBFT_DIR) $(LIBMINIRT_DIR) $(MLX_DIR) $(TARGET)
 
 submodule:
 	@git submodule update --init --recursive
@@ -81,9 +89,13 @@ $(LIBMINIRT_DIR):
 $(MLX_DIR):
 	@-make -C $(MLX_DIR)
 
-$(TARGET): $(OBJS)
+$(TARGET): $(OBJS) $(LIBMINIRTA) $(LIBARITHA) $(LIBFTA)
 	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $^ $(LIB_PATHS) $(LIB_FLAGS) -o $@
-	@echo $(GREEN)"--- $(PROJECT_NAME) Compiling Sccusse $(COMPILE_TYPE)! ---"$(RESET)
+	@echo $(GREEN)"--- $(PROJECT_NAME) compiled successfully $(COMPILE_TYPE) ---"$(RESET)
+
+# $(TARGET): $(OBJS)
+# 	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $^ $(LIB_PATHS) $(LIB_FLAGS) -o $@
+# 	@echo $(GREEN)"--- $(PROJECT_NAME) compiled successfully $(COMPILE_TYPE) ---"$(RESET)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $(DEPEND_FLAGS) -c $< -o $@
