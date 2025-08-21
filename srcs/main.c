@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -31,9 +32,15 @@ int	main(int argc, char *argv[])
 		return (ret_errmsg(EXIT_FAILURE, USAGE_MSG));
 	vars = mrt_init();
 	if (vars == NULL)
-		return (perrturn(EXIT_FAILURE, "mrt_init"));
-	if (mrt_set_value(vars, argv[1]))
+	{
+		if (errno)
+			perror("mrt_init");
+		return (EXIT_FAILURE);
+	}
+	if (0 < mrt_read_file(vars, argv[1]))
 		a(vars);
+	else if (errno)
+		perror("mrt_read_file");
 	mrt_destroty(vars);
 	return (EXIT_SUCCESS);
 }
