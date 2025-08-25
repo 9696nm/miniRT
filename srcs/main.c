@@ -21,6 +21,7 @@
 
 void	a(void *vars)
 {
+	printf("success !\n");
 	(void)vars;
 }
 
