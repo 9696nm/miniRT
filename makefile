@@ -26,8 +26,8 @@ OPT_FLAGS		=	-O0
 INC_PATHS		=	$(addprefix -I,$(INC_DIR))
 
 LIB_PATHS		=	$(addprefix -L,$(LIB_DIR))
-LIB_FLAGS		=	-lXext -lX11 -lm -lmlx_Linux
-# LIB_FLAGS		=	-lXext -lX11 -lm -lmlx_Linux -lmrt -larith -lft
+LIB_FLAGS		=	-lmlx_Linux -lXext -lX11 -lm 
+# LIB_FLAGS		=	-lmlx_Linux -lXext -lX11 -lm -lmrt -larith -lft
 
 DEPEND_FLAGS	=	-MMD -MP
 

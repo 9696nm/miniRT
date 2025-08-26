@@ -19,10 +19,10 @@
 #include "minirt.h"
 #include "rt_viewer.h"
 
-void	a(void *vars)
+void	minirt_display(void *vars)
 {
 	printf("success !\n");
-	(void)vars;
+	mrt_loop(vars);
 }
 
 int	main(int argc, char *argv[])
@@ -39,7 +39,7 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	}
 	if (0 < mrt_read_file(vars, argv[1]))
-		a(vars);
+		minirt_display(vars);
 	else if (errno)
 		perror("mrt_read_file");
 	mrt_destroty(vars);
