@@ -6,7 +6,7 @@
 #    By: hana/hmori <hmori@student.42tokyo.jp>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 15:14:11 by hana/hmori        #+#    #+#              #
-#    Updated: 2025/07/15 00:07:29 by hana/hmori       ###   ########.fr        #
+#    Updated: 2025/08/26 15:10:43 by hana/hmori       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ MAKEFLAGS		+=	--no-print-directory
 
 # -compile rule-
 CC				=	gcc
-WARNING_FLAGS	=	-Wall -Wextra -Werror -Wuninitialized
+# WARNING_FLAGS	=	-Wall -Wextra -Werror -Wuninitialized
 OPT_FLAGS		=	-O0
 INC_PATHS		=	$(addprefix -I,$(INC_DIR))
 
@@ -84,7 +84,7 @@ $(LIBFT_DIR):
 	@make -C $(LIBFT_DIR) all extra arith
 
 $(LIBMINIRT_DIR):
-	@make -C $(LIBMINIRT_DIR) DEP_INCLUDES="$(abspath $(LIBFT_DIR))"
+	@make -C $(LIBMINIRT_DIR) DEP_INCLUDES="$(abspath $(LIBFT_DIR) $(MLX_DIR))"
 
 $(MLX_DIR):
 	@-make -C $(MLX_DIR)
