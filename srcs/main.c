@@ -22,22 +22,6 @@ static int	key_press(int keycode, t_graph *vars)
 {
 	if (keycode == XK_Escape)
 		return (window_destroy(vars));
-	// if (keycode == XK_Up)
-	// 	vars->arrof = crd_off_move(vars->rqv, vars->arrof, (t_vec3){0, 1, 0});
-	// else if (keycode == XK_Down)
-	// 	vars->arrof = crd_off_move(vars->rqv, vars->arrof, (t_vec3){0, -1, 0});
-	// else if (keycode == XK_Left)
-	// 	vars->arrof = crd_off_move(vars->rqv, vars->arrof, (t_vec3){1, 0, 0});
-	// else if (keycode == XK_Right)
-	// 	vars->arrof = crd_off_move(vars->rqv, vars->arrof, (t_vec3){-1, 0, 0});
-	// else if (keycode == XK_period)
-	// 	vars->arrof.z_elast += 0.1;
-	// else if (keycode == XK_comma)
-	// 	vars->arrof.z_elast -= 0.1;
-	// else if (keycode == XK_slash)
-	// 	vars->gflag.fl ^= (1 << TOGGLE_PERSPECTIVE);
-	// else if (keycode == XK_0)
-	// 	parameter_init(vars);
 	else if (keycode == XK_n)
 		;
 	else
@@ -46,29 +30,14 @@ static int	key_press(int keycode, t_graph *vars)
 	return (0);
 }
 
-#include <time.h>	//
-#include <sys/time.h>	//
-static int	graphic_loop(t_graph *vars)	// !debug
+static int	graphic_loop(t_graph *vars)
 {
-	struct timeval	start_time, end_time;	//
-	struct timespec	start_clock, end_clock;	//
-
 	if (vars->gfx_flags & (1u << RE_GRAPHIC))
 	{
-		gettimeofday(&start_time, NULL);	//
-		clock_gettime(CLOCK_MONOTONIC, &start_clock);	//
-	
 		vars->gfx_flags &= ~(1u << RE_GRAPHIC);
 		mrt_image_clear_mlx(vars->img, WIDTH, HEIGHT);
 		mrt_image_render_mlx(vars->scene, vars->img, WIDTH, HEIGHT);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, 0, 0);
-	
-		gettimeofday(&end_time, NULL);	//
-		clock_gettime(CLOCK_MONOTONIC, &end_clock);	//
-		printf("time :%.6f\n", (end_time.tv_sec - start_time.tv_sec) +
-			(end_time.tv_usec - start_time.tv_usec) / 1000000.0);	//
-		printf("clock:%.6f\n", (end_clock.tv_sec - start_clock.tv_sec) +
-			(end_clock.tv_nsec - start_clock.tv_nsec) / 1e9);	//
 	}
 	return (0);
 }
