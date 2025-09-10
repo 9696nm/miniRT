@@ -10,3 +10,5 @@ objs
 
 # --- add ---
 miniRT
+
+test.c

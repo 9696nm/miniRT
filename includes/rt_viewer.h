@@ -21,7 +21,8 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <X11/keysymdef.h>
-# include "mlx.h"
+
+# include <mlx.h>
 
 # include "ft/stdio.h"
 # include "minirt.h"
@@ -34,21 +35,20 @@ typedef enum e_displaysize
 	HEIGHT = 1080
 }	t_dsize;
 
-typedef struct s_imgdata
+typedef enum e_glaphic_flags
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-}	t_idata;
+	RE_GRAPHIC,
+	MOUSE_PRESS,
+	TOGGLE_PERSPECTIVE
+}	t_gfx_flags;
 
 typedef struct s_graphic
 {
-	void	*scene;
-	void	*mlx;
-	void	*win;
-	t_idata	idata;
+	void			*scene;
+	void			*mlx;
+	void			*win;
+	void			*img;
+	unsigned int	gfx_flags;
 }	t_graph;
 
 #endif /* RT_VIEWER_H */
