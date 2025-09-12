@@ -83,8 +83,8 @@ $(LIBMINIRT_DIR):
 $(MLX_DIR):
 	@-make -C $(MLX_DIR)
 
-$(TARGET): $(OBJS)
-	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $^ $(LIB_PATHS) $(LIB_FLAGS) -o $@
+$(TARGET): $(OBJS) $(LIBMINIRTA) $(LIBARITHA) $(LIBFTA)
+	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $(LIB_PATHS) $^ $(LIB_FLAGS) -o $@
 	@echo $(GREEN)"--- $(PROJECT_NAME) compiled successfully $(COMPILE_TYPE) ---"$(RESET)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
