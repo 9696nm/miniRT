@@ -90,7 +90,7 @@ $(MLX_DIR):
 	@-make -C $(MLX_DIR)
 
 $(TARGET): $(OBJS) $(LIBMINIRTA) $(LIBARITHA) $(LIBFTA)
-	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $^ $(LIB_PATHS) $(LIB_FLAGS) -o $@
+	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $(LIB_PATHS) $^ $(LIB_FLAGS) -o $@
 	@echo $(GREEN)"--- $(PROJECT_NAME) compiled successfully $(COMPILE_TYPE) ---"$(RESET)
 
 # $(TARGET): $(OBJS)
