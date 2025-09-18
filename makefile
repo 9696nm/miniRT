@@ -74,6 +74,9 @@ RESET			=	"\033[0m"
 # --rule--	
 all: $(LIBFT_DIR) $(LIBMINIRT_DIR) $(MLX_DIR) $(TARGET)
 
+submodule:
+	@git submodule update --init --recursive
+
 $(LIBFT_DIR):
 	@make -C $(LIBFT_DIR) all extra arith
 
