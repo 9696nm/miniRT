@@ -21,13 +21,12 @@ MAKEFLAGS		+=	--no-print-directory
 
 # -compile rule-
 CC				=	gcc
-# WARNING_FLAGS	=	-Wall -Wextra -Werror -Wuninitialized
+WARNING_FLAGS	=	-Wall -Wextra -Werror -Wuninitialized
 OPT_FLAGS		=	-O0
 INC_PATHS		=	$(addprefix -I,$(INC_DIR))
 
 LIB_PATHS		=	$(addprefix -L,$(LIB_DIR))
-LIB_FLAGS		=	-lmlx_Linux -lXext -lX11 -lm 
-# LIB_FLAGS		=	-lmlx_Linux -lXext -lX11 -lm -lmrt -larith -lft
+LIB_FLAGS		=	-lmrt -lft -larith -lmlx_Linux -lm -lXext -lX11
 
 DEPEND_FLAGS	=	-MMD -MP
 
@@ -43,8 +42,7 @@ MLX_DIR			=	minilibx-linux/
 
 # -target-
 INC_DIR			=	includes/ $(LIBFT_DIR) $(LIBMINIRT_DIR) $(MLX_DIR)
-LIB_DIR			=	$(MLX_DIR)
-# LIB_DIR			=	$(LIBFT_DIR) $(LIBMINIRT_DIR) $(MLX_DIR)
+LIB_DIR			=	$(LIBFT_DIR) $(LIBMINIRT_DIR) $(MLX_DIR)
 SRC_DIR			=	srcs/
 OBJ_DIR			=	objs/
 
@@ -74,11 +72,7 @@ RESET			=	"\033[0m"
 
 
 # --rule--	
-# all: submodule $(LIBFT_DIR) $(LIBMINIRT_DIR) $(MLX_DIR) $(TARGET)
 all: $(LIBFT_DIR) $(LIBMINIRT_DIR) $(MLX_DIR) $(TARGET)
-
-submodule:
-	@git submodule update --init --recursive
 
 $(LIBFT_DIR):
 	@make -C $(LIBFT_DIR) all extra arith
@@ -92,10 +86,6 @@ $(MLX_DIR):
 $(TARGET): $(OBJS) $(LIBMINIRTA) $(LIBARITHA) $(LIBFTA)
 	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $(LIB_PATHS) $^ $(LIB_FLAGS) -o $@
 	@echo $(GREEN)"--- $(PROJECT_NAME) compiled successfully $(COMPILE_TYPE) ---"$(RESET)
-
-# $(TARGET): $(OBJS)
-# 	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $^ $(LIB_PATHS) $(LIB_FLAGS) -o $@
-# 	@echo $(GREEN)"--- $(PROJECT_NAME) compiled successfully $(COMPILE_TYPE) ---"$(RESET)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(CC) $(WARNING_FLAGS) $(OPT_FLAGS) $(INC_PATHS) $(DEPEND_FLAGS) -c $< -o $@
