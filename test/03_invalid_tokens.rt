@@ -1,0 +1,6 @@
+A  1.2                 255,255,255            # invalid: ratio > 1.0 (if comments unsupported, parser should fail on garbage after line)
+C  0,0,0               0,0,0         60       # invalid: camera orientation cannot be zero vector
+L  0,0,0               -0.1          255,255,255   # invalid: brightness < 0.0
+sp 0,0,0               -2.0          255,255,255   # invalid: diameter <= 0
+pl 0,0,0               0,1,0,0       255,255,255   # invalid: too many components for normal
+cy 0,0,0               0,1,0         1.0     -3.0  255,255,255   # invalid: height <= 0

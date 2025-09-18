@@ -1,0 +1,4 @@
+A  0.2                 256,255,255      # invalid: 256 out of range
+C  0,1,-5              0,0,1            60
+L  -2,3,-1             0.6              255,-1,255   # invalid: -1 out of range
+sp 0,0,4               2.0              255,0,300    # invalid: 300 out of range
